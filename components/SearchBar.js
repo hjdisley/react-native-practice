@@ -10,8 +10,8 @@ const SearchBar = (props) => {
     <View>
       <TextInput
         placeholder="Search Here..."
-        value={props.searchValue}
-        onChange={handleChange}
+        value={searchValue}
+        onChange={handleInput}
         style={{
           borderColor: 'black',
           borderWidth: 1,
@@ -19,7 +19,22 @@ const SearchBar = (props) => {
           margin: 10,
         }}
       />
-      <Button />
+      <TouchableOpacity
+        onPress={() => {
+          setSearchValue(searchValue);
+          fetchData();
+        }}
+        style={{
+          textAlign: 'center',
+          backgroundColor: 'blue',
+          padding: 10,
+          margin: 10,
+        }}
+      >
+        <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
+          Submit
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };

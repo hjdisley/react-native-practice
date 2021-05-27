@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import {
+  Text,
+  View,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from 'react-native';
 import ImageCard from '../components/ImageCard';
 import SearchBar from '../components/SearchBar';
 
@@ -10,10 +16,10 @@ const SearchPage = ({ navigation }) => {
 
   useEffect(() => {
     fetchData();
-  }, [searchValue]);
+  }, []);
 
-  const handleChange = (newValue) => {
-    setSearchValue(newValue);
+  const handleInput = (event) => {
+    setSearchValue(event.target.value);
   };
 
   const fetchData = async () => {
@@ -31,10 +37,37 @@ const SearchPage = ({ navigation }) => {
       </View>
     );
   }
+
   return (
     <View>
       <Text style={styles.title}>Nasa Image Search</Text>
-      <SearchBar value={searchValue} onChange={handleChange} />
+      <TextInput
+        placeholder="Search Here..."
+        value={searchValue}
+        onChange={handleInput}
+        style={{
+          borderColor: 'black',
+          borderWidth: 1,
+          padding: 15,
+          margin: 10,
+        }}
+      />
+      <TouchableOpacity
+        onPress={() => {
+          setSearchValue(searchValue);
+          fetchData();
+        }}
+        style={{
+          textAlign: 'center',
+          backgroundColor: 'blue',
+          padding: 10,
+          margin: 10,
+        }}
+      >
+        <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
+          Submit
+        </Text>
+      </TouchableOpacity>
       <ImageCard data={data} navigation={navigation} />
     </View>
   );

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
+import { SafeAreaView } from 'react-native';
 import { FlatList } from 'react-native';
 import { Text, ScrollView } from 'react-native';
 import { Image } from 'react-native-elements';
@@ -14,8 +15,9 @@ const ImageCard = ({ data, navigation }) => {
 
   return (
     <>
-      <ScrollView>
+      <SafeAreaView>
         <FlatList
+          keyExtractor={(item, index) => index.toString()}
           data={data.collection.items}
           renderItem={({ item }) => (
             <>
@@ -38,7 +40,7 @@ const ImageCard = ({ data, navigation }) => {
             </>
           )}
         />
-      </ScrollView>
+      </SafeAreaView>
     </>
   );
 };

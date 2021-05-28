@@ -7,19 +7,17 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import ImageCard from '../components/ImageCard';
-import SearchBar from '../components/SearchBar';
 
 const SearchPage = ({ navigation }) => {
   const [data, setData] = useState([]);
-  const [searchValue, setSearchValue] = useState('');
-  const [loading, setLoading] = useState(true);
+  const [searchValue, setSearchValue] = useState('apollo');
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const handleInput = (event) => {
-    setSearchValue(event.target.value);
+    setSearchValue(event.nativeEvent.text);
   };
 
   const fetchData = async () => {
@@ -28,15 +26,7 @@ const SearchPage = ({ navigation }) => {
     );
     const jsonData = await response.json();
     setData(jsonData);
-    setLoading(false);
   };
-  if (loading) {
-    return (
-      <View>
-        <Text>Loading...</Text>
-      </View>
-    );
-  }
 
   return (
     <View>
@@ -54,7 +44,7 @@ const SearchPage = ({ navigation }) => {
       />
       <TouchableOpacity
         onPress={() => {
-          setSearchValue(searchValue);
+          // setSearchValue(searchValue);
           fetchData();
         }}
         style={{
@@ -64,7 +54,14 @@ const SearchPage = ({ navigation }) => {
           margin: 10,
         }}
       >
-        <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
+        <Text
+          style={{
+            color: 'white',
+            fontSize: 16,
+            fontWeight: 'bold',
+            textAlign: 'center',
+          }}
+        >
           Submit
         </Text>
       </TouchableOpacity>
